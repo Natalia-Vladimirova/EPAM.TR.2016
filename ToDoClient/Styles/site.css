@@ -1,3 +1,81 @@
-﻿#newName {
-    width: 100%
+﻿#tasks {
+    width: 70%;
+    margin: auto;
+    box-shadow: 0 0 40px rgba(44, 91, 58, .7), 0 0 40px rgba(0, 0, 0, 0.7);
 }
+
+.header {
+    background-color: #2c5b3a;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+}
+
+#new,.element {
+    overflow: hidden;
+}
+
+.element:nth-child(odd) {
+    background-color: #d9d9d9;
+}
+
+.element:nth-child(even) {
+    background-color: #F0F0F0;
+}
+
+.element:hover {
+    background-color: #bbbbbb;
+}
+
+.delete-button {
+    background-image: url("Images/delete.png");
+    background-size: contain;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    float: left;
+}
+
+.delete-button:hover {
+    background-color: #FF3365;
+}
+
+.add-button {
+    font-weight: bold;
+    padding: 2%;
+    width: 21%;
+    background: #d9d9d9;
+    color: #555555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-button:hover {
+    background-color: #bbbbbb;
+}
+
+#newName {
+    border: none;
+    width: 71%;
+    padding: 2%;
+    float: left;
+    font-size: 16px;
+}
+
+.element input {
+    float: left;
+    width: 5%;
+    border-radius: 50%;
+}
+
+.element p {
+    margin: 0;
+    width: 85%;
+    float: left;
+}
+
+
+
