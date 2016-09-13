@@ -59,10 +59,16 @@
 
 #newName {
     border: none;
-    width: 71%;
+    width: 61%;
     padding: 2%;
     float: left;
     font-size: 16px;
+}
+
+#newCompleted {
+    float: left;
+    width: 10%;
+    margin: 2.5% 0 0 0;
 }
 
 .element input {
@@ -77,5 +83,11 @@
     float: left;
 }
 
+.loading {
+    width: 160px;
+    height: 20px;
+    background-image: url("Images/loading.gif");
+    margin:auto;
+}
 
 

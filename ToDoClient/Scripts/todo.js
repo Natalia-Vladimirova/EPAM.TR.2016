@@ -117,9 +117,11 @@ $(function () {
             });
     });
 
+    $(".body").addClass("loading");
     // load all tasks on startup
     tasksManager.loadTasks()
         .done(function(tasks) {
             tasksManager.displayTasks("#tasks > .body", tasks);
+            $(".body").removeClass("loading");
         });
 });
