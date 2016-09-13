@@ -3,9 +3,9 @@ using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using ToDoClient.Models;
+using WcfToDoService.Entities;
 
-namespace ToDoClient.Services
+namespace WcfToDoService.Services
 {
     /// <summary>
     /// Works with ToDo backend.
@@ -53,17 +53,17 @@ namespace ToDoClient.Services
         /// </summary>
         /// <param name="userId">The User Id.</param>
         /// <returns>The list of todos.</returns>
-        public IList<ToDoItemViewModel> GetItems(int userId)
+        public IList<ToDoModel> GetItems(int userId)
         {
             var dataAsString = httpClient.GetStringAsync(string.Format(serviceApiUrl + GetAllUrl, userId)).Result;
-            return JsonConvert.DeserializeObject<IList<ToDoItemViewModel>>(dataAsString);
+            return JsonConvert.DeserializeObject<IList<ToDoModel>>(dataAsString);
         }
 
         /// <summary>
         /// Creates a todo. UserId is taken from the model.
         /// </summary>
         /// <param name="item">The todo to create.</param>
-        public void CreateItem(ToDoItemViewModel item)
+        public void CreateItem(ToDoModel item)
         {
             httpClient.PostAsJsonAsync(serviceApiUrl + CreateUrl, item)
                 .Result.EnsureSuccessStatusCode();
@@ -73,7 +73,7 @@ namespace ToDoClient.Services
         /// Updates a todo.
         /// </summary>
         /// <param name="item">The todo to update.</param>
-        public void UpdateItem(ToDoItemViewModel item)
+        public void UpdateItem(ToDoModel item)
         {
             httpClient.PutAsJsonAsync(serviceApiUrl + UpdateUrl, item)
                 .Result.EnsureSuccessStatusCode();

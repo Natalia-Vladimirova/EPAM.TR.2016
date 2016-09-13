@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WcfToDoService\WcfToDoService.csproj">
-      <Project>{00f91a53-158c-4955-8033-058407ab04e6}</Project>
+      <Project>{c29fc758-af7b-4873-a6f2-8ac843c4cb4a}</Project>
       <Name>WcfToDoService</Name>
     </ProjectReference>
   </ItemGroup>

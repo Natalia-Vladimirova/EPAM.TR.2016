@@ -11,7 +11,7 @@ namespace SelfHostCreator
         {
             Uri baseAddress = new Uri("http://localhost:8080/toDoService");
 
-            using (ServiceHost host = new ServiceHost(typeof (ToDoService), baseAddress))
+            using (ServiceHost host = new ServiceHost(typeof(WcfProxyService), baseAddress))
             {
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior
                 {

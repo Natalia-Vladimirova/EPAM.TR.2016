@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfToDoService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfToDoService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfToDoMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ToDoMessage" nillable="true" type="tns:ToDoMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfToDoMessage" nillable="true" type="tns:ArrayOfToDoMessage" />
+  <xs:complexType name="ToDoMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsCompleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToDoId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ToDoMessage" nillable="true" type="tns:ToDoMessage" />
+</xs:schema>
