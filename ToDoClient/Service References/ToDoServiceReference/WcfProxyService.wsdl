@@ -13,6 +13,12 @@
   <wsdl:message name="IWcfProxyService_GetOrCreateUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOrCreateUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IWcfProxyService_InitTodos_InputMessage">
+    <wsdl:part name="parameters" element="tns:InitTodos" />
+  </wsdl:message>
+  <wsdl:message name="IWcfProxyService_InitTodos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InitTodosResponse" />
+  </wsdl:message>
   <wsdl:message name="IWcfProxyService_GetTodos_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTodos" />
   </wsdl:message>
@@ -42,6 +48,10 @@
       <wsdl:input wsam:Action="http://tempuri.org/IWcfProxyService/GetOrCreateUser" message="tns:IWcfProxyService_GetOrCreateUser_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IWcfProxyService/GetOrCreateUserResponse" message="tns:IWcfProxyService_GetOrCreateUser_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="InitTodos">
+      <wsdl:input wsam:Action="http://tempuri.org/IWcfProxyService/InitTodos" message="tns:IWcfProxyService_InitTodos_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IWcfProxyService/InitTodosResponse" message="tns:IWcfProxyService_InitTodos_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetTodos">
       <wsdl:input wsam:Action="http://tempuri.org/IWcfProxyService/GetTodos" message="tns:IWcfProxyService_GetTodos_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IWcfProxyService/GetTodosResponse" message="tns:IWcfProxyService_GetTodos_OutputMessage" />
@@ -63,6 +73,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetOrCreateUser">
       <soap:operation soapAction="http://tempuri.org/IWcfProxyService/GetOrCreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitTodos">
+      <soap:operation soapAction="http://tempuri.org/IWcfProxyService/InitTodos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

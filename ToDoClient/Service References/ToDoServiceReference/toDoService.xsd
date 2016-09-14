@@ -15,6 +15,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="InitTodos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InitTodosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WcfToDoService" minOccurs="0" name="InitTodosResult" nillable="true" type="q1:ArrayOfToDoMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetTodos">
     <xs:complexType>
       <xs:sequence>
@@ -25,15 +39,14 @@
   <xs:element name="GetTodosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WcfToDoService" minOccurs="0" name="GetTodosResult" nillable="true" type="q1:ArrayOfToDoMessage" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfToDoService" minOccurs="0" name="GetTodosResult" nillable="true" type="q2:ArrayOfToDoMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateTodo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfToDoService" minOccurs="0" name="todo" nillable="true" type="q2:ToDoMessage" />
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfToDoService" minOccurs="0" name="todo" nillable="true" type="q3:ToDoMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -45,8 +58,7 @@
   <xs:element name="UpdateTodo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfToDoService" minOccurs="0" name="todo" nillable="true" type="q3:ToDoMessage" />
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WcfToDoService" minOccurs="0" name="todo" nillable="true" type="q4:ToDoMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

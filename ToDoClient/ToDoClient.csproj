@@ -105,6 +105,8 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Styles\Images\delete.png" />
+    <Content Include="Styles\Images\loading.gif" />
     <Content Include="Styles\site.css" />
     <Content Include="Web.config" />
   </ItemGroup>

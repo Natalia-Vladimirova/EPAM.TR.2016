@@ -22,6 +22,13 @@
         });
     };
 
+    // adds all tasks as rows (deletes all rows before).
+    // @parentSelector: selector to append a row to.
+    // @tasks: array of tasks to append.
+    var initTasks = function (parentSelector, tasks) {
+        return $.getJSON("/api/todos?init=true");
+    };
+
     // starts loading tasks from server.
     // @returns a promise.
     var loadTasks = function() {
@@ -71,6 +78,7 @@
 
     // returns public interface of task manager.
     return {
+        initTasks: initTasks,
         loadTasks: loadTasks,
         displayTasks: displayTasks,
         createTask: createTask,
@@ -119,7 +127,7 @@ $(function () {
 
     $(".body").addClass("loading");
     // load all tasks on startup
-    tasksManager.loadTasks()
+    tasksManager.initTasks()
         .done(function(tasks) {
             tasksManager.displayTasks("#tasks > .body", tasks);
             $(".body").removeClass("loading");

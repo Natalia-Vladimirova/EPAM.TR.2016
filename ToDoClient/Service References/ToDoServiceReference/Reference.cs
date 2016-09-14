@@ -116,6 +116,12 @@ namespace ToDoClient.ToDoServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/GetOrCreateUser", ReplyAction="http://tempuri.org/IWcfProxyService/GetOrCreateUserResponse")]
         System.Threading.Tasks.Task<int> GetOrCreateUserAsync(string id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/InitTodos", ReplyAction="http://tempuri.org/IWcfProxyService/InitTodosResponse")]
+        System.Collections.Generic.List<ToDoClient.ToDoServiceReference.ToDoMessage> InitTodos(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/InitTodos", ReplyAction="http://tempuri.org/IWcfProxyService/InitTodosResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<ToDoClient.ToDoServiceReference.ToDoMessage>> InitTodosAsync(int userId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/GetTodos", ReplyAction="http://tempuri.org/IWcfProxyService/GetTodosResponse")]
         System.Collections.Generic.List<ToDoClient.ToDoServiceReference.ToDoMessage> GetTodos(int userId);
         
@@ -123,16 +129,16 @@ namespace ToDoClient.ToDoServiceReference {
         System.Threading.Tasks.Task<System.Collections.Generic.List<ToDoClient.ToDoServiceReference.ToDoMessage>> GetTodosAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/CreateTodo", ReplyAction="http://tempuri.org/IWcfProxyService/CreateTodoResponse")]
-        void CreateTodo(ToDoClient.ToDoServiceReference.ToDoMessage todo, int userId);
+        void CreateTodo(ToDoClient.ToDoServiceReference.ToDoMessage todo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/CreateTodo", ReplyAction="http://tempuri.org/IWcfProxyService/CreateTodoResponse")]
-        System.Threading.Tasks.Task CreateTodoAsync(ToDoClient.ToDoServiceReference.ToDoMessage todo, int userId);
+        System.Threading.Tasks.Task CreateTodoAsync(ToDoClient.ToDoServiceReference.ToDoMessage todo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/UpdateTodo", ReplyAction="http://tempuri.org/IWcfProxyService/UpdateTodoResponse")]
-        void UpdateTodo(ToDoClient.ToDoServiceReference.ToDoMessage todo, int userId);
+        void UpdateTodo(ToDoClient.ToDoServiceReference.ToDoMessage todo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/UpdateTodo", ReplyAction="http://tempuri.org/IWcfProxyService/UpdateTodoResponse")]
-        System.Threading.Tasks.Task UpdateTodoAsync(ToDoClient.ToDoServiceReference.ToDoMessage todo, int userId);
+        System.Threading.Tasks.Task UpdateTodoAsync(ToDoClient.ToDoServiceReference.ToDoMessage todo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfProxyService/DeleteTodo", ReplyAction="http://tempuri.org/IWcfProxyService/DeleteTodoResponse")]
         void DeleteTodo(int id);
@@ -176,6 +182,14 @@ namespace ToDoClient.ToDoServiceReference {
             return base.Channel.GetOrCreateUserAsync(id);
         }
         
+        public System.Collections.Generic.List<ToDoClient.ToDoServiceReference.ToDoMessage> InitTodos(int userId) {
+            return base.Channel.InitTodos(userId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<ToDoClient.ToDoServiceReference.ToDoMessage>> InitTodosAsync(int userId) {
+            return base.Channel.InitTodosAsync(userId);
+        }
+        
         public System.Collections.Generic.List<ToDoClient.ToDoServiceReference.ToDoMessage> GetTodos(int userId) {
             return base.Channel.GetTodos(userId);
         }
@@ -184,20 +198,20 @@ namespace ToDoClient.ToDoServiceReference {
             return base.Channel.GetTodosAsync(userId);
         }
         
-        public void CreateTodo(ToDoClient.ToDoServiceReference.ToDoMessage todo, int userId) {
-            base.Channel.CreateTodo(todo, userId);
+        public void CreateTodo(ToDoClient.ToDoServiceReference.ToDoMessage todo) {
+            base.Channel.CreateTodo(todo);
         }
         
-        public System.Threading.Tasks.Task CreateTodoAsync(ToDoClient.ToDoServiceReference.ToDoMessage todo, int userId) {
-            return base.Channel.CreateTodoAsync(todo, userId);
+        public System.Threading.Tasks.Task CreateTodoAsync(ToDoClient.ToDoServiceReference.ToDoMessage todo) {
+            return base.Channel.CreateTodoAsync(todo);
         }
         
-        public void UpdateTodo(ToDoClient.ToDoServiceReference.ToDoMessage todo, int userId) {
-            base.Channel.UpdateTodo(todo, userId);
+        public void UpdateTodo(ToDoClient.ToDoServiceReference.ToDoMessage todo) {
+            base.Channel.UpdateTodo(todo);
         }
         
-        public System.Threading.Tasks.Task UpdateTodoAsync(ToDoClient.ToDoServiceReference.ToDoMessage todo, int userId) {
-            return base.Channel.UpdateTodoAsync(todo, userId);
+        public System.Threading.Tasks.Task UpdateTodoAsync(ToDoClient.ToDoServiceReference.ToDoMessage todo) {
+            return base.Channel.UpdateTodoAsync(todo);
         }
         
         public void DeleteTodo(int id) {
