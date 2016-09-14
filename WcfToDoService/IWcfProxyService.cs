@@ -10,13 +10,16 @@ namespace WcfToDoService
         int GetOrCreateUser(string id);
 
         [OperationContract]
+        IList<ToDoMessage> InitTodos(int userId);
+
+        [OperationContract]
         IList<ToDoMessage> GetTodos(int userId);
 
         [OperationContract]
-        void CreateTodo(ToDoMessage todo, int userId);
+        void CreateTodo(ToDoMessage todo);
 
         [OperationContract]
-        void UpdateTodo(ToDoMessage todo, int userId);
+        void UpdateTodo(ToDoMessage todo);
 
         [OperationContract]
         void DeleteTodo(int id);
