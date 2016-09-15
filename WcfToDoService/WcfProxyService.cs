@@ -19,14 +19,15 @@ namespace WcfToDoService
 
         private readonly Queue<Task> taskQueue = new Queue<Task>();
 
-        private readonly ReaderWriterLockSlim readerWriterLock = new ReaderWriterLockSlim();
+        private readonly object lockObj = new object();
 
         private readonly Dictionary<string, int> idMapping = new Dictionary<string, int>();
 
-        private readonly WcfRepository repository = new WcfRepository();
+        private readonly IRepository repository;
         
-        public WcfProxyService()
+        public WcfProxyService(IRepository repository)
         {
+            this.repository = repository;
             StartThreadForTodoUpdates();
         }
 
@@ -68,9 +69,7 @@ namespace WcfToDoService
                 return;
             }
 
-            readerWriterLock.EnterWriteLock();
-
-            try
+            lock (lockObj)
             {
                 taskQueue.Enqueue(new Task(() =>
                 {
@@ -83,10 +82,6 @@ namespace WcfToDoService
                     }
                 }));
             }
-            finally
-            {
-                readerWriterLock.ExitWriteLock();
-            }
         }
 
         public void UpdateTodo(ToDoMessage todo)
@@ -95,9 +90,8 @@ namespace WcfToDoService
             var todoModel = Mapper.Map<ToDoMessage, ToDoModel>(todo);
             
             repository.UpdateTodo(todoModel);
-            readerWriterLock.EnterWriteLock();
-            try
-            {
+            lock (lockObj)
+            { 
                 taskQueue.Enqueue(new Task(() =>
                 {
                     Mapper.Initialize(cfg => cfg.CreateMap<ToDoMessage, ToDoModel>());
@@ -106,10 +100,6 @@ namespace WcfToDoService
                     todoCloudModel.ToDoId = todoCloudId;
                     todoService.UpdateItem(todoCloudModel);
                 }));
-            }
-            finally
-            {
-                readerWriterLock.ExitWriteLock();
             }
         }
 
@@ -121,8 +111,7 @@ namespace WcfToDoService
 
             repository.DeleteTodo(id);
 
-            readerWriterLock.EnterWriteLock();
-            try
+            lock (lockObj)
             {
                 taskQueue.Enqueue(new Task(() =>
                 {
@@ -130,10 +119,6 @@ namespace WcfToDoService
                     todoService.DeleteItem(todoCloudId);
                     idMapping.Remove(todoName + todoUserId);
                 }));
-            }
-            finally
-            {
-                readerWriterLock.ExitWriteLock();
             }
         }
 
@@ -144,26 +129,20 @@ namespace WcfToDoService
                 while (true)
                 {
                     Task task = null;
-                    readerWriterLock.EnterWriteLock();
 
-                    try
+                    lock (lockObj)
                     {
                         if (taskQueue.Count != 0)
                         {
                             task = taskQueue.Dequeue();
                         }
                     }
-                    finally
-                    {
-                        readerWriterLock.ExitWriteLock();
-                    }
 
-                    if (task != null)
-                    {
-                        task.RunSynchronously();
-                    }
+                    task?.RunSynchronously();
                 }
             });
+
+            thread.IsBackground = true;
             thread.Start();
         }
     }

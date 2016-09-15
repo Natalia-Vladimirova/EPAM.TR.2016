@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using WcfToDoService.Entities;
 
 namespace WcfToDoService.Repositories
 {
-    public class WcfRepository
+    public class WcfRepository : IRepository
     {
-        private readonly ReaderWriterLockSlim readerWriterLock = new ReaderWriterLockSlim();
+        private readonly object lockObj = new object();
 
         private readonly List<ToDoModel> todos = new List<ToDoModel>();
 
@@ -15,28 +14,23 @@ namespace WcfToDoService.Repositories
         
         public IList<ToDoModel> GetTodos(int userId)
         {
-            readerWriterLock.EnterReadLock();
-
-            try
+            lock (lockObj)
             {
                 return todos;
-            }
-            finally
-            {
-                readerWriterLock.ExitReadLock();
             }
         }
 
         public ToDoModel GetTodoByWcfId(int wcfToDoId)
         {
-            return todos.FirstOrDefault(t => t.ToDoId == wcfToDoId);
+            lock (lockObj)
+            {
+                return todos.FirstOrDefault(t => t.ToDoId == wcfToDoId);
+            }
         }
 
         public bool CreateTodo(ToDoModel todo)
         {
-            readerWriterLock.EnterWriteLock();
-
-            try
+            lock (lockObj)
             {
                 if (!IsTodoNew(todo))
                 {
@@ -47,17 +41,11 @@ namespace WcfToDoService.Repositories
                 todos.Add(todo);
                 return true;
             }
-            finally
-            {
-                readerWriterLock.ExitWriteLock();
-            }
         }
 
         public void UpdateTodo(ToDoModel newTodo)
         {
-            readerWriterLock.EnterWriteLock();
-
-            try
+            lock (lockObj)
             {
                 var todo = todos.FirstOrDefault(t => t.ToDoId == newTodo.ToDoId);
                 if (todo != null)
@@ -65,27 +53,17 @@ namespace WcfToDoService.Repositories
                     todo.IsCompleted = newTodo.IsCompleted;
                 }
             }
-            finally
-            {
-                readerWriterLock.ExitWriteLock();
-            }
         }
 
         public void DeleteTodo(int id)
         {
-            readerWriterLock.EnterWriteLock();
-
-            try
+            lock (lockObj)
             {
                 var todo = todos.FirstOrDefault(t => t.ToDoId == id);
                 if (todo != null)
                 {
                     todos.Remove(todo);
                 }
-            }
-            finally
-            {
-                readerWriterLock.ExitWriteLock();
             }
         }
         
@@ -102,11 +80,6 @@ namespace WcfToDoService.Repositories
             public int GetNextToDoId()
             {
                 return ++currentId;
-            }
-
-            public int GetCurrentToDoId()
-            {
-                return currentId;
             }
         }
     }

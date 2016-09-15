@@ -40,6 +40,9 @@
     // @name: name of new task.
     // @return a promise.
     var createTask = function(isCompleted, name) {
+        $("#newName").val("");
+        $("#newCompleted").prop("checked", false);
+
         return $.post("/api/todos",
         {
             IsCompleted: isCompleted,

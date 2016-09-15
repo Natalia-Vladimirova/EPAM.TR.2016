@@ -1,7 +1,8 @@
 ﻿#tasks {
-    width: 70%;
+    width: 60%;
     margin: auto;
     box-shadow: 0 0 40px rgba(44, 91, 58, .7), 0 0 40px rgba(0, 0, 0, 0.7);
+    -webkit-user-select: none;
 }
 
 .header {

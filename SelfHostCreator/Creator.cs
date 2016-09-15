@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using WcfToDoService;
+using WcfToDoService.Repositories;
 
 namespace SelfHostCreator
 {
@@ -11,7 +12,10 @@ namespace SelfHostCreator
         {
             Uri baseAddress = new Uri("http://localhost:8080/toDoService");
 
-            using (ServiceHost host = new ServiceHost(typeof(WcfProxyService), baseAddress))
+            IRepository repository = new WcfRepository();
+            IWcfProxyService service = new WcfProxyService(repository);
+
+            using (ServiceHost host = new ServiceHost(service, baseAddress))
             {
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior
                 {

@@ -19,12 +19,7 @@
 
             ToDoModel model = obj as ToDoModel;
 
-            if (model == null)
-            {
-                return false;
-            }
-
-            return ToDoId == model.ToDoId;
+            return ToDoId == model?.ToDoId;
         }
 
         public override int GetHashCode()
